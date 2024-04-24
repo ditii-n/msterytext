@@ -11,7 +11,7 @@ export async function POST(request:Request){
         const existingUserVerifiedByUsername =await UserModel.findOne({
             username, isVerified:true
         })
-
+        //username already exists
         if(existingUserVerifiedByUsername){
             return Response.json({
                 success:false,
@@ -20,6 +20,7 @@ export async function POST(request:Request){
         }
 
         const existingUserByEmail= await UserModel.findOne({email})
+        //code to be sent in mail for verification
         const verifyCode= Math.floor(100000+Math.random()*900000).toString();
 
         if(existingUserByEmail){
